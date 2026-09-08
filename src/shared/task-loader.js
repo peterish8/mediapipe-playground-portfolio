@@ -4,6 +4,15 @@ import { FilesetResolver as GenAiFilesetResolver } from "@mediapipe/tasks-genai"
 let visionFilesetPromise;
 let genAiFilesetPromise;
 
+async function cacheAsset(cache, url, blob) {
+  if (!cache) return;
+  try {
+    await cache.put(url, new Response(blob, { headers: { "Content-Type": blob.type || "application/octet-stream" } }));
+  } catch (error) {
+    console.warn("Model cache unavailable; continuing without a persistent copy.", error);
+  }
+}
+
 export function getVisionFileset() {
   visionFilesetPromise ??= VisionFilesetResolver.forVisionTasks("/wasm/vision");
   return visionFilesetPromise;
@@ -42,7 +51,7 @@ export async function fetchModelAsset(url, options = {}) {
   const reader = response.body?.getReader();
   if (!reader) {
     const blob = await response.blob();
-    await cache?.put(url, new Response(blob, { headers: { "Content-Type": blob.type || "application/octet-stream" } }));
+    await cacheAsset(cache, url, blob);
     const objectUrl = URL.createObjectURL(blob);
     options.onProgress?.({ loaded: blob.size, total: blob.size, percent: 100, fromCache: false });
     return { url: objectUrl, blob, fromCache: false, revoke: () => URL.revokeObjectURL(objectUrl) };
@@ -63,7 +72,7 @@ export async function fetchModelAsset(url, options = {}) {
     });
   }
   const blob = new Blob(chunks, { type: response.headers.get("content-type") || "application/octet-stream" });
-  await cache?.put(url, new Response(blob, { headers: { "Content-Type": blob.type } }));
+  await cacheAsset(cache, url, blob);
   const objectUrl = URL.createObjectURL(blob);
   options.onProgress?.({ loaded: blob.size, total: total || blob.size, percent: 100, fromCache: false });
   return { url: objectUrl, blob, fromCache: false, revoke: () => URL.revokeObjectURL(objectUrl) };

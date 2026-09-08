@@ -1,4 +1,6 @@
 import "../styles.css";
+import "../shared/ambient-shader.js";
+import "../shared/micro-interactions.js";
 import { ImageSegmenter } from "@mediapipe/tasks-vision";
 import { attachCamera, requestMedia } from "../shared/camera.js";
 import { MODEL_URLS } from "../shared/constants.js";

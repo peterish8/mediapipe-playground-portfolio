@@ -1,4 +1,6 @@
 import "../styles.css";
+import "../shared/ambient-shader.js";
+import "../shared/micro-interactions.js";
 import { LlmInference } from "@mediapipe/tasks-genai";
 import { CHAT_MODELS } from "../shared/constants.js";
 import { checkGenAiCapability } from "../shared/backend-badge.js";
