@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Magic Mirror — fully on-device MediaPipe demo." />
+  <title>Magic Mirror · MediaPipe Playground</title>
+  <script type="module" src="/src/pages/filters.js"></script>
+</head>
+<body>
+  <main class="site-shell">
+    <header class="site-header">
+      <div>
+        <a class="back-link" href="/">← Playground</a>
+        <div class="eyebrow" style="margin-top:22px"><span class="live-dot"></span>FaceLandmarker · procedural AR</div>
+        <h1 class="demo-title">Magic Mirror</h1>
+      </div>
+      <div class="status-stack">
+        <span id="backend-badge" class="badge">Checking hardware…</span>
+        
+      </div>
+    </header>
+
+    <section id="error-panel" class="error-panel hidden" role="alert">
+      <h3 data-error-title>Something went wrong</h3>
+      <p data-error-detail></p>
+      <button class="btn ghost" data-error-retry hidden>Try again</button>
+    </section>
+
+    
+    <section id="permission-panel" class="permission-panel">
+      <h3>Turn on the magic mirror</h3>
+      <p>This demo uses your camera to locate face landmarks. Filters are canvas shapes—not uploaded sticker assets—and all processing stays local.</p>
+      <button id="start-button" class="btn primary">Enable camera and start</button>
+    </section>
+    <section id="loading-panel" class="loading-panel hidden">
+      <div class="control-label">Loading FaceLandmarker</div>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+      <div class="progress-meta"><span id="progress-label">Preparing…</span><span id="progress-percent">0%</span></div>
+    </section>
+    <section id="demo" class="demo-grid hidden">
+      <div class="panel viewport">
+        <video id="video" class="source-video" playsinline muted></video>
+        <canvas id="display-canvas"></canvas>
+        <div id="viewport-placeholder" class="placeholder">Center your face in the frame.</div>
+      </div>
+      <aside class="panel controls">
+        <div class="control-group"><span class="control-label">Filter</span><div id="filter-tabs" class="filter-tabs"></div></div>
+        <div class="btn-row"><button id="snapshot-button" class="btn light">Snapshot PNG</button></div>
+        <div id="recording-indicator" class="recording-indicator"><i></i>Recording <span id="recording-timer">00:00</span></div>
+        <div class="btn-row"><button id="record-button" class="btn primary">Record video</button><button id="stop-button" class="btn danger" hidden>Stop</button></div>
+        <div id="preview-box" class="preview-box">
+          <video id="preview" controls playsinline></video>
+          <div class="btn-row"><button id="download-recording" class="btn primary">Download</button><button id="retake" class="btn">Retake</button></div>
+        </div>
+        <p class="notice">The recording includes microphone audio if permission is granted when you press Record. Declining audio still records the filtered video.</p>
+      </aside>
+    </section>
+
+    <footer>no telemetry · no API keys · processing stays on this device</footer>
+  </main>
+  <div class="toast" role="status"></div>
+</body>
+</html>

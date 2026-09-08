@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="On-Device AI Chat — fully on-device MediaPipe demo." />
+  <title>On-Device AI Chat · MediaPipe Playground</title>
+  <script type="module" src="/src/pages/chat.js"></script>
+</head>
+<body>
+  <main class="site-shell">
+    <header class="site-header">
+      <div>
+        <a class="back-link" href="/">← Playground</a>
+        <div class="eyebrow" style="margin-top:22px"><span class="live-dot"></span>LlmInference · WebGPU only</div>
+        <h1 class="demo-title">On-Device AI Chat</h1>
+      </div>
+      <div class="status-stack">
+        <span id="backend-badge" class="badge">Checking hardware…</span>
+        <span id="ttft-badge" class="badge hidden">TTFT: —</span>
+      </div>
+    </header>
+
+    <section id="error-panel" class="error-panel hidden" role="alert">
+      <h3 data-error-title>Something went wrong</h3>
+      <p data-error-detail></p>
+      <button class="btn ghost" data-error-retry hidden>Try again</button>
+    </section>
+
+    
+    <section id="capability-panel" class="permission-panel">
+      <h3>Checking WebGPU</h3>
+      <p>Unlike the vision demos, browser LLM inference has no CPU/WASM fallback. A compatible GPU is required before any model download begins.</p>
+    </section>
+    <section id="chat-demo" class="panel chat-layout hidden">
+      <div class="notice"><strong>Model license note:</strong> Gemma 3 repositories are license-gated on Hugging Face. Accept the Gemma license there first if a 401/403 appears. The 2 GB Gemma 4 tier is Apache-2.0.</div>
+      <div class="control-group"><span class="control-label">Choose a local model</span><div id="model-grid" class="model-grid"></div></div>
+      <button id="initialize-button" class="btn primary">Initialize selected model</button>
+      <section id="loading-panel" class="loading-panel hidden">
+        <div class="control-label">Downloading and compiling</div>
+        <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+        <div class="progress-meta"><span id="progress-label">Preparing…</span><span id="progress-percent">0%</span></div>
+      </section>
+      <label class="control-group"><span class="control-label">Prompt</span><textarea id="prompt" class="textarea" placeholder="Ask the model something…" disabled></textarea></label>
+      <div class="btn-row"><button id="generate-button" class="btn light" disabled>Generate</button><button id="cancel-button" class="btn danger" hidden>Cancel generation</button></div>
+      <div id="response" class="response" aria-live="polite">Initialize a model to begin.</div>
+    </section>
+
+    <footer>no telemetry · no API keys · processing stays on this device</footer>
+  </main>
+  <div class="toast" role="status"></div>
+</body>
+</html>

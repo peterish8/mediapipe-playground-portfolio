@@ -1,0 +1,33 @@
+{
+  "name": "mediapipe-playground",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Five creative, zero-server MediaPipe demos that run entirely in the browser.",
+  "scripts": {
+    "predev": "node scripts/copy-wasm.js",
+    "dev": "vite",
+    "prebuild": "node scripts/copy-wasm.js",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "tsc -p jsconfig.json",
+    "test": "node --test tests/*.test.js",
+    "verify": "npm run check && npm run test && npm run build"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-genai": "0.10.29",
+    "@mediapipe/tasks-vision": "0.10.35",
+    "fix-webm-duration": "1.0.6",
+    "tone": "15.1.22"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "^24.0.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "8.1.5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

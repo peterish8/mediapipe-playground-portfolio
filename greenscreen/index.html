@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Green Screen Studio — fully on-device MediaPipe demo." />
+  <title>Green Screen Studio · MediaPipe Playground</title>
+  <script type="module" src="/src/pages/greenscreen.js"></script>
+</head>
+<body>
+  <main class="site-shell">
+    <header class="site-header">
+      <div>
+        <a class="back-link" href="/">← Playground</a>
+        <div class="eyebrow" style="margin-top:22px"><span class="live-dot"></span>ImageSegmenter · local compositing</div>
+        <h1 class="demo-title">Green Screen Studio</h1>
+      </div>
+      <div class="status-stack">
+        <span id="backend-badge" class="badge">Checking hardware…</span>
+        <span id="fps-badge" class="badge hidden">0 fps</span>
+      </div>
+    </header>
+
+    <section id="error-panel" class="error-panel hidden" role="alert">
+      <h3 data-error-title>Something went wrong</h3>
+      <p data-error-detail></p>
+      <button class="btn ghost" data-error-retry hidden>Try again</button>
+    </section>
+
+    
+    <section id="permission-panel" class="permission-panel">
+      <h3>No green wall required</h3>
+      <p>Your camera frames are segmented locally into person and background. Choose a replacement, then record the composited canvas—not the raw camera.</p>
+      <button id="start-button" class="btn primary">Enable camera and start</button>
+    </section>
+    <section id="loading-panel" class="loading-panel hidden">
+      <div class="control-label">Loading ImageSegmenter</div>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+      <div class="progress-meta"><span id="progress-label">Preparing…</span><span id="progress-percent">0%</span></div>
+    </section>
+    <section id="demo" class="demo-grid hidden">
+      <div class="panel viewport">
+        <video id="video" class="source-video" playsinline muted></video>
+        <canvas id="display-canvas"></canvas>
+        <div id="viewport-placeholder" class="placeholder">Stand in frame while the person mask initializes.</div>
+      </div>
+      <aside class="panel controls">
+        <div class="control-group"><span class="control-label">Background mode</span><div id="mode-tabs" class="mode-tabs"></div></div>
+        <label id="solid-control" class="control-group hidden"><span class="control-label">Solid color</span><input id="solid-color" type="color" value="#12372a" /></label>
+        <label id="upload-control" class="control-group hidden"><span class="control-label">Upload background</span><input id="upload-image" class="text-input" type="file" accept="image/*" /></label>
+        <div class="readout"><div class="readout-box"><span class="control-label">Mask refresh</span><strong id="fps-readout">—</strong></div><div class="readout-box"><span class="control-label">Mode</span><strong id="mode-readout">Blur</strong></div></div>
+        <div id="recording-indicator" class="recording-indicator"><i></i>Recording <span id="recording-timer">00:00</span></div>
+        <div class="btn-row"><button id="record-button" class="btn light">Record video</button><button id="stop-button" class="btn danger" hidden>Stop</button></div>
+        <div id="preview-box" class="preview-box">
+          <video id="preview" controls playsinline></video>
+          <div class="btn-row"><button id="download-recording" class="btn primary">Download</button><button id="retake" class="btn">Retake</button></div>
+        </div>
+        <p class="notice">Mask readback is throttled to protect the frame budget; the canvas continues rendering smoothly between segmentation updates.</p>
+      </aside>
+    </section>
+
+    <footer>no telemetry · no API keys · processing stays on this device</footer>
+  </main>
+  <div class="toast" role="status"></div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Five creative MediaPipe AI demos that run entirely in your browser." />
+  <title>MediaPipe Playground</title>
+  <script type="module" src="/src/pages/home.js"></script>
+</head>
+<body>
+  <main class="site-shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="live-dot"></span>100% local · zero servers</div>
+      <h1>AI you can<br />actually touch.</h1>
+      <p>Five playful experiments powered by real MediaPipe models in your browser. Your camera, microphone, drawings, and prompts never travel to an app server—and every demo gives you a file to keep.</p>
+      <div class="trust-row">
+        <span class="badge success">On-device inference</span>
+        <span class="badge">No account</span>
+        <span class="badge">No API key</span>
+        <span class="badge">Local downloads</span>
+      </div>
+    </section>
+
+    <section class="card-grid" aria-label="Showcases">
+      <a class="showcase-card" href="/chat/">
+        <span class="card-icon">✦</span><h2>On-Device AI Chat</h2>
+        <p>Download a local Gemma model once, then watch its answer stream entirely on your GPU.</p>
+        <div class="card-foot"><span class="capability">LlmInference · WebGPU</span><span>Try it →</span></div>
+      </a>
+      <a class="showcase-card" href="/instrument/">
+        <span class="card-icon">〽</span><h2>Gesture Synth Instrument</h2>
+        <p>Turn hand position into pitch and gestures into instrument changes, then download your performance.</p>
+        <div class="card-foot"><span class="capability">GestureRecognizer · Tone.js</span><span>Try it →</span></div>
+      </a>
+      <a class="showcase-card" href="/canvas/">
+        <span class="card-icon">✎</span><h2>Air Canvas</h2>
+        <p>Pinch your fingers to draw in mid-air. Change colors, clear, and save the art as a PNG.</p>
+        <div class="card-foot"><span class="capability">HandLandmarker</span><span>Try it →</span></div>
+      </a>
+      <a class="showcase-card" href="/filters/">
+        <span class="card-icon">◉</span><h2>Magic Mirror</h2>
+        <p>Wear procedural face filters tracked live to your features. Snapshot or record the result.</p>
+        <div class="card-foot"><span class="capability">FaceLandmarker</span><span>Try it →</span></div>
+      </a>
+      <a class="showcase-card" href="/greenscreen/">
+        <span class="card-icon">▧</span><h2>Green Screen Studio</h2>
+        <p>Blur or replace your background with on-device person segmentation and save a video.</p>
+        <div class="card-foot"><span class="capability">ImageSegmenter</span><span>Try it →</span></div>
+      </a>
+    </section>
+    <footer>no telemetry · no API keys · works offline once models are cached</footer>
+  </main>
+</body>
+</html>
